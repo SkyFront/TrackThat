@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">TrackThat</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="title">TRACK THAT</string>
+    <string name="title_desc">Welcome to Track That. The interactive app that allows you to keep counts of the all the little things in your daily life.</string>
+    <string name="new_track_button">New Track List</string>
+    <string name="view_track">See my tracks</string>
 </resources>
