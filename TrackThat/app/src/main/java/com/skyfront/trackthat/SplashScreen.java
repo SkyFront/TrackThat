@@ -1,26 +1,40 @@
 package com.skyfront.trackthat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.*;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 
-public class StartUp extends ActionBarActivity {
+public class SplashScreen extends ActionBarActivity {
+
+    private long SPLASH_DISPLAY_LENGTH = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_up);
+        setContentView(R.layout.activity_splash_screen);
+
+        /* New Handler to start the Menu-Activity
+         * and close this Splash-Screen after some seconds.*/
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                /* Create an Intent that will start the Menu-Activity. */
+                Intent mainIntent = new Intent(SplashScreen.this, StartUp.class);
+                startActivity(mainIntent);
+                finish();
+            }
+        }, SPLASH_DISPLAY_LENGTH);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_start_up, menu);
+        getMenuInflater().inflate(R.menu.menu_splash_screen, menu);
         return true;
     }
 
@@ -37,13 +51,5 @@ public class StartUp extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void newTrack(View view){
-        Toast.makeText(this, "Create new list", Toast.LENGTH_LONG).show();
-    }
-
-    public void viewTrack(View view){
-        Toast.makeText(this, "View lists if available", Toast.LENGTH_LONG).show();
     }
 }

@@ -5,4 +5,8 @@
     <string name="title_desc">Welcome to Track That. The interactive app that allows you to keep counts of the all the little things in your daily life.</string>
     <string name="new_track_button">New Track List</string>
     <string name="view_track">See my tracks</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+
+    <string name="splash_message">Welcome!</string>
+    <string name="action_settings">Settings</string>
 </resources>
