@@ -2,9 +2,15 @@ package com.skyfront.trackthat;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 
@@ -40,7 +46,36 @@ public class StartUp extends ActionBarActivity {
     }
 
     public void newTrack(View view){
-        Toast.makeText(this, "Create new list", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Create new list", Toast.LENGTH_LONG).show();
+        LayoutInflater inflate = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = inflate.inflate(R.layout.new_list_popup,null);
+        final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
+
+        Button cancel = (Button)popupView.findViewById(R.id.cancelButton);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+
+        Button newList = (Button)popupView.findViewById(R.id.createButton);
+        newList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText listTitle = (EditText)popupView.findViewById(R.id.listName);
+                String listName = listTitle.getText().toString().trim();
+
+                if(!listName.isEmpty()){
+                    //TODO save new list
+
+
+                }
+                else
+                    Toast.makeText(popupView.getContext(),"Please enter a name for your list", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void viewTrack(View view){

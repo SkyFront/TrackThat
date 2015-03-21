@@ -6,7 +6,8 @@
     <string name="new_track_button">New Track List</string>
     <string name="view_track">See my tracks</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
-
+    <string name="newListTitle">What would you like to track?</string>
+    <string name="listHint">e.g. Coffee consumption</string>
     <string name="splash_message">Welcome!</string>
     <string name="action_settings">Settings</string>
 </resources>
