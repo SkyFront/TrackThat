@@ -1,11 +1,13 @@
-package com.skyfront.trackthat;
+package com.skyfront.trackthat.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.*;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.skyfront.trackthat.R;
 
 
 public class SplashScreen extends ActionBarActivity {

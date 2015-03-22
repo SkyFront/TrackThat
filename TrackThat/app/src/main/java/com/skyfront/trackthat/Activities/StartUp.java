@@ -1,4 +1,4 @@
-package com.skyfront.trackthat;
+package com.skyfront.trackthat.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+
+import com.skyfront.trackthat.R;
 
 
 public class StartUp extends ActionBarActivity {
@@ -50,7 +52,10 @@ public class StartUp extends ActionBarActivity {
         LayoutInflater inflate = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         final View popupView = inflate.inflate(R.layout.new_list_popup,null);
         final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.update();
 
         Button cancel = (Button)popupView.findViewById(R.id.cancelButton);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +74,8 @@ public class StartUp extends ActionBarActivity {
 
                 if(!listName.isEmpty()){
                     //TODO save new list
-
+                    //TODO jump to new Helpers.Counter activity
+                    Toast.makeText(popupView.getContext(), listName, Toast.LENGTH_LONG).show();
 
                 }
                 else
