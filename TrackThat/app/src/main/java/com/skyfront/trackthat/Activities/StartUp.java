@@ -1,5 +1,6 @@
 package com.skyfront.trackthat.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -75,7 +76,10 @@ public class StartUp extends ActionBarActivity {
                 if(!listName.isEmpty()){
                     //TODO save new list
                     //TODO jump to new Helpers.Counter activity
-                    Toast.makeText(popupView.getContext(), listName, Toast.LENGTH_LONG).show();
+                    Intent newCounter = new Intent(popupView.getContext(),NewCounter.class);
+                    newCounter.putExtra("countTitle",listName );
+                    startActivity(newCounter);
+//                    Toast.makeText(popupView.getContext(), listName, Toast.LENGTH_LONG).show();
 
                 }
                 else

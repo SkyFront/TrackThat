@@ -2,6 +2,7 @@ package Helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -21,10 +22,48 @@ public class DatabaseAdaptor{
     public long insertData(String trackName, int count){
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues contentvalues = new ContentValues();
-        contentvalues.put(DatabaseHelper.NAME, trackName);
-        contentvalues.put(DatabaseHelper.QUANTITY, count);
+        contentvalues.put(DatabaseHelper.KEY_NAME, trackName);
+        contentvalues.put(DatabaseHelper.KEY_QUANTITY, count);
         long id = db.insert(DatabaseHelper.TABLE_NAME,null,contentvalues);
         return id;
+    }
+
+    public String getAllData(){
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String[] columns = {DatabaseHelper.KEY_UID, DatabaseHelper.KEY_NAME, DatabaseHelper.KEY_QUANTITY};
+        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,columns,null,null,null,null,null);
+        StringBuffer data = new StringBuffer();
+        while(cursor.moveToNext()){
+            int index1 = cursor.getColumnIndex(DatabaseHelper.KEY_UID);
+            int index2 = cursor.getColumnIndex(DatabaseHelper.KEY_NAME);
+            int index3 = cursor.getColumnIndex(DatabaseHelper.KEY_QUANTITY);
+
+            int cid = cursor.getInt(index1);
+            String title = cursor.getString(index2);
+            int quantity = cursor.getInt(index3);
+
+            data.append(cid+" "+title+" "+quantity+"\n");
+        }
+
+        return data.toString();
+    }
+
+    public String getQuantity(String name){
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String[] columns = {DatabaseHelper.KEY_NAME, DatabaseHelper.KEY_QUANTITY};
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,columns,
+                                 DatabaseHelper.KEY_NAME+" =?",selectionArgs,null,null,null);
+        StringBuffer data = new StringBuffer();
+        while(cursor.moveToNext()){
+            int index1 = cursor.getColumnIndex(DatabaseHelper.KEY_QUANTITY);
+            int quantity = cursor.getInt(index1);
+
+            data.append(quantity+"\n");
+        }
+        return data.toString();
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
@@ -32,9 +71,9 @@ public class DatabaseAdaptor{
         private static final String DATABASE_NAME = "trackthatcounter";
         private static final int DATABASE_VERSION = 1;
         private static final String TABLE_NAME = "counterTable";
-        private static final String UID = "_id";
-        private static final String NAME = "trackItem";
-        private static final String QUANTITY = "numberCounted";
+        private static final String KEY_UID = "_id";
+        private static final String KEY_NAME = "trackItem";
+        private static final String KEY_QUANTITY = "numberCounted";
         private Context context;
         private String log = "Helpers.DatabaseAdaptor";
 
@@ -46,8 +85,8 @@ public class DatabaseAdaptor{
 
         public void onCreate(SQLiteDatabase db) {
             try {
-                String create = "CREATE TABLE " + TABLE_NAME + " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        NAME + " VARCHAR(255)," + QUANTITY + " INTEGER);";
+                String create = "CREATE TABLE " + TABLE_NAME + " (" + KEY_UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        KEY_NAME + " VARCHAR(255)," + KEY_QUANTITY + " INTEGER);";
 
                 db.execSQL(create);
                 System.out.println(log + "DbHelper onCreate");
