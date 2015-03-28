@@ -8,33 +8,39 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/dataText"
+        android:id="@+id/newTrackTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:padding="20dp"
         android:text="no data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="displayData"
-        android:text="all data"/>
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <TextView
+       android:id="@+id/countNumber"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text = "0"
+       android:textColor="@color/white"
+       android:textSize="150sp"
+       android:layout_centerInParent="true" />
+       <Button
+           android:id="@+id/incrementButton"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:background="#33000000"
+           android:text="(+)"
+           android:textSize="75sp"
+           android:textColor="@color/white"
+           android:textStyle="bold"
+           android:gravity="bottom|center_horizontal"
+           android:onClick="increment"/>
+   </RelativeLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="query"
-        android:id="@+id/nameInQuestion"/>
 
-    <TextView
-        android:id="@+id/query"
-        android:text="not found"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search"
-        android:onClick="searchData"/>
 
 </LinearLayout>

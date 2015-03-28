@@ -1,4 +1,4 @@
-package com.skyfront.trackthat.activities;
+package com.skyfront.trackthat.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,8 +15,8 @@ import com.skyfront.trackthat.R;
 import Helpers.DatabaseAdaptor;
 
 public class NewCounter extends ActionBarActivity {
-    TextView data,query;
-    EditText search;
+    TextView count, title;
+    Button increment;
     DatabaseAdaptor dbAdaptor;
     String countTitle;
     @Override
@@ -27,6 +27,8 @@ public class NewCounter extends ActionBarActivity {
         //grab title
         Intent fromIntent = getIntent();
         countTitle = fromIntent.getStringExtra("countTitle");
+        title = (TextView)findViewById(R.id.newTrackTitle);
+        title.setText(countTitle);
 
         //create db
         dbAdaptor = new DatabaseAdaptor(this);
@@ -43,10 +45,9 @@ public class NewCounter extends ActionBarActivity {
         }
 
         //textview focus
-        data = (TextView)findViewById(R.id.dataText);
-        query = (TextView)findViewById(R.id.query);
-        //edittext focus
-        search = (EditText)findViewById(R.id.nameInQuestion);
+       count = (TextView)findViewById(R.id.countNumber);
+        //button focus
+       increment = (Button)findViewById(R.id.incrementButton);
 
     }
 
@@ -73,17 +74,12 @@ public class NewCounter extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void displayData(View view){
-        //show data
-        String dbData = dbAdaptor.getAllData();
-        data.setText(dbData);
-    }
+    public void increment(View view){
+        int currentCount = Integer.parseInt(count.getText().toString());
+        currentCount++;
+        count.setText(currentCount);
 
-    public void searchData(View view){
-        String name=search.getText().toString().trim();
-        String result = dbAdaptor.getQuantity(name);
-
-        query.setText(result);
-
+        //update database
+        dbAdaptor.updateQualtity(countTitle, currentCount);
     }
 }

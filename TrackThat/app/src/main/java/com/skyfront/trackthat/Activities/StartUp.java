@@ -1,4 +1,4 @@
-package com.skyfront.trackthat.activities;
+package com.skyfront.trackthat.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;

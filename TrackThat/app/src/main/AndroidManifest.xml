@@ -8,11 +8,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activities.StartUp"
+            android:name=".Activities.StartUp"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".activities.SplashScreen"
+            android:name=".Activities.SplashScreen"
             android:label="@string/title_activity_splash_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.NewCounter"
+            android:name=".Activities.NewCounter"
             android:label="@string/title_activity_new_counter" >
         </activity>
     </application>
