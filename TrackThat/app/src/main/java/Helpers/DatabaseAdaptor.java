@@ -66,6 +66,23 @@ public class DatabaseAdaptor{
         return data.toString();
     }
 
+    public int updateQualtity(String oldName, int newQuantity){
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues content = new ContentValues();
+        content.put(DatabaseHelper.KEY_NAME, newQuantity);
+        String[] whereArgs = {oldName};
+        int count = db.update(DatabaseHelper.TABLE_NAME, content, DatabaseHelper.KEY_NAME+" =?", whereArgs);
+        return count;
+    }
+
+    public int deleteRow(String rowName){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] whereArgs = {rowName};
+        int count = db.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.KEY_NAME+" =?", whereArgs);
+        return count;
+    }
+
     private static class DatabaseHelper extends SQLiteOpenHelper {
 
         private static final String DATABASE_NAME = "trackthatcounter";
